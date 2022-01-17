@@ -1,9 +1,9 @@
 let index = 0
-//let pokeimg
+let pokeimg
 
 function preload(){
   pokedex = loadJSON('data/pokedex.json')
-  //pokeimg = loadImage(pokedex.pokemon[index].img)
+  pokeimg = loadImage(pokedex.pokemon[index].img)
 }
   
 function setup() {
@@ -259,10 +259,10 @@ text(pokedex.pokemon[index].caught, x+65, y+529)
 
 
 //Pokemon afbeelding
- //imageMode(CENTER)
- //image(pokeimg, x+100, y+200, 100, 100)
+ imageMode(CENTER)
+ image(pokeimg, x+100, y+200, 100, 100)
 
- //console.log(pokeimg)
+ console.log(pokeimg)
 
  //rect(x+510, y+425, 100, 100)
 
@@ -292,5 +292,5 @@ if (index < 0){
   index = 150
 }
 
-//pokeimg = loadImage(pokedex.pokemon[index].img)
+pokeimg = loadImage(pokedex.pokemon[index].img)
 }
