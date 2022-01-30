@@ -1,11 +1,22 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/////BELANGRIJK
+/////
+/////Voordat je gebruik gaat maken van deze code eerst tijdelijke toegang aanvragen via deze link: https://cors-anywhere.herokuapp.com/corsdemo
+/////
+/////Hierna kan je het project bekijken zonder CORS foutmeldingen.
+/////Je zult echter niet alle afbeeldingen kunnen inladen vanwege beperkte toegang.
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 let index = 0
 let pokeimg
+let icoon
 
 function preload(){
   pokedex = loadJSON('data/pokedex.json')
-  pokeimg = loadImage(pokedex.pokemon[index].img)
-}
-  
+  pokeimg = loadImage("https://cors-anywhere.herokuapp.com/http://www.serebii.net/pokemongo/pokemon/001.png")
+ }
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight)
   background(240)
@@ -103,10 +114,7 @@ function setup() {
   vertex(x+300, y+150);
   vertex(x+50, y+150);
   endShape();
-  //Scherm zelf
-  noStroke();
-  fill("#232324");
-  rect(x+75, y+175, 200, 140, 5);
+
   //Details
   strokeWeight(2);
   stroke('Black');
@@ -120,11 +128,6 @@ function setup() {
 
   //Onder scherm
   strokeWeight(4);
-  fill("red");
-  rect(x+100, y+397, 50, 10, 20)
-  fill("#1A5E80");
-  rect(x+175, y+397, 50, 10, 20)
-
   fill("#232324")
   circle(x+50, y+400, 40)
 
@@ -177,11 +180,12 @@ function setup() {
   stroke("black");
   rect(x+450, y+250, 250, 100);
   strokeWeight(2);
+  for(i=0;i<4;i++){
+    line(x+500+(50*i),y+250, x+500+(50*i), y+350)
+ 
+  }
   line(x+450, y+300, x+700, y+300);
-  line(x+500, y+250, x+500, y+350);
-  line(x+550, y+250, x+550, y+350);
-  line(x+600, y+250, x+600, y+350);
-  line(x+650, y+250, x+650, y+350);
+
   //Onder details
   strokeWeight(4);
   fill("#232324")
@@ -206,15 +210,14 @@ function setup() {
   strokeWeight(4);
   rect(x+450, y+525, 100, 30, 7);
   rect(x+600, y+525, 100, 30, 7);
-
-  
 }
 
-function draw() {  
+function draw() {
 let x = width/2-400
 let y = height/2-300
 //Bovenscherm
 strokeWeight(4);
+stroke('black');
 fill("#51AE60");
 rect(x+450, y+150, 250, 75, 5);
 fill('Black');
@@ -242,31 +245,40 @@ text("CAUGHT:", x+65, y+511)
 text(pokedex.pokemon[index].caught, x+65, y+529)
 
 //Rechterkant Gele lamp
-// let lamp1 = 'red'
 
-// strokeWeight(4);
-// stroke("black");
-
-// for(i=0;i<1000;i++){
-//   if(i<=500){
-//     lamp1 = 'red'
-//   }else{lamp1 = 'yellow'
-//   console.log(i,lamp1)
-// }
-// }
-// fill(lamp1)
-// circle(x+680, y+450, 50)
-
+strokeWeight(4);
+stroke("black");
+    fill("yellow")
+    circle(x+680, y+450, 50)
 
 //Pokemon afbeelding
- imageMode(CENTER)
- image(pokeimg, x+100, y+200, 100, 100)
+imageMode(CENTER);
+  //Scherm zelf
+  noStroke();
+  fill("#232324");
+  rect(x+75, y+175, 200, 140, 5);
+  image(pokeimg, x+175, y+245, 180, 120);
 
- console.log(pokeimg)
+//console.log(pokeimg)
 
- //rect(x+510, y+425, 100, 100)
+//Next - Prev evolution
+strokeWeight(4);
+stroke('black')
+if(pokedex.pokemon[index].prev_evolution){
+  fill('lime')
+  rect(x+100, y+397, 50, 10, 20)
+}else{
+  fill("red")
+  rect(x+100, y+397, 50, 10, 20)
+}
+if(pokedex.pokemon[index].next_evolution){
+  fill("lime");
+  rect(x+175, y+397, 50, 10, 20)
+}else{
+  fill("#1A5E80");
+  rect(x+175, y+397, 50, 10, 20)
+}
 
- console.log(index)
 }
 
 
@@ -292,5 +304,5 @@ if (index < 0){
   index = 150
 }
 
-pokeimg = loadImage(pokedex.pokemon[index].img)
+pokeimg = loadImage('https://cors-anywhere.herokuapp.com/' + pokedex.pokemon[index].img)
 }
